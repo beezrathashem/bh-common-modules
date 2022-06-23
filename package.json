@@ -1,22 +1,25 @@
 {
   "name": "bh-common-modules",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "version": "0.0.1",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --passWithNoTests"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/beezrathashem/bh-common-modules.git"
+  "dependencies": {
+    "bh-common-modules": "beezrathashem/bh-common-modules.git"
   },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/beezrathashem/bh-common-modules/issues"
+  "devDependencies": {
+    "@react-native-firebase/firestore": "14.9.4"
   },
-  "homepage": "https://github.com/beezrathashem/bh-common-modules#readme",
   "peerDependencies": {
-    "react": "*"
+    "@react-native-firebase/firestore": "*",
+    "@types/react": "*",
+    "@types/react-native": "*",
+    "@react-navigation/bottom-tabs": "*",
+    "@react-navigation/native": "*",
+    "@react-navigation/native-stack": "*",
+    "react": "*",
+    "react-native": "*",
+    "twnrc": "*"
   }
 }
