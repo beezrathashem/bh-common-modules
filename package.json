@@ -16,7 +16,7 @@
     "url": "https://github.com/beezrathashem/bh-common-modules/issues"
   },
   "homepage": "https://github.com/beezrathashem/bh-common-modules#readme",
-  "dependencies": {
-    "react": "^17.0.2"
+  "peerDependencies": {
+    "react": "*"
   }
 }
