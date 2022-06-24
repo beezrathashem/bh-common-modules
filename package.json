@@ -5,21 +5,9 @@
   "scripts": {
     "test": "jest --passWithNoTests"
   },
-  "dependencies": {
-    "bh-common-modules": "beezrathashem/bh-common-modules.git"
-  },
-  "devDependencies": {
-    "@react-native-firebase/firestore": "14.9.4"
-  },
   "peerDependencies": {
-    "@react-native-firebase/firestore": "*",
-    "@types/react": "*",
-    "@types/react-native": "*",
-    "@react-navigation/bottom-tabs": "*",
-    "@react-navigation/native": "*",
-    "@react-navigation/native-stack": "*",
-    "react": "*",
-    "react-native": "*",
-    "twnrc": "*"
+    "@types/react": "~17.0.21",
+    "react": "17.0.2",
+    "react-dom": "17.0.2"
   }
 }
