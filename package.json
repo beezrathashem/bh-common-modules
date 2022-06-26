@@ -24,11 +24,9 @@
     "moment": "^2.24.0",
     "prettier": "^2.5.1",
     "query-string": "^6.9.0",
-    "react": "17.0.2",
     "rn-fetch-blob": "^0.12.0",
     "rn-slider-switch": "0.0.3",
-    "styled-components": "^5.2.1",
-    "@babel/plugin-transform-runtime": "^7.12.10"
+    "styled-components": "^5.2.1"
   },
   "devDependencies": {
     "@babel/cli": "7.12.10",
@@ -44,6 +42,13 @@
     "jest": "26.6.3",
     "mocha": "^6.2.0",
     "pre-commit": "^1.2.2",
-    "typescript": "latest"
+    "@types/lodash": "^4.14.178",
+    "@types/react": "^17.0.13",
+    "@types/react-dom": "^17.0.8",
+    "@types/react-native": "^0.66.4",
+    "lodash": "4.17.21",
+    "react": "17.0.2",
+    "react-native": "0.66.4",
+    "scripts": "*"
   }
 }
