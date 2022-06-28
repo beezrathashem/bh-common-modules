@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
 
-export const useLectures = (fb: any) => {
+export const useLectures = (fb: any, overrideQuery = {}) => {
   const [lastSnapshot, setLastSnapshot] = useState(null);
   const [lectureQuery, updateLectureQuery] = useState({
     filter: '',
     language: 'English',
     speaker: '',
     playlistName: '',
+    ...overrideQuery
   });
   const [paginating, setPaginating] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
