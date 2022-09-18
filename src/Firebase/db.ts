@@ -14,5 +14,6 @@ export function initDB(firestore: any) {
     topicsDB: firestore().collection('topics'),
     livestreamsDB: firestore().collection('livestreams'),
     playlistsDB: firestore().collection('playlists'),
+    usersDB: firestore().collection('users'),
   };
 }

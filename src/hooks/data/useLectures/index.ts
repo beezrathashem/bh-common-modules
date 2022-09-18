@@ -4,7 +4,7 @@ export const useLectures = (fb: any, overrideQuery = {}) => {
   const [lastSnapshot, setLastSnapshot] = useState(null);
   const [lectureQuery, updateLectureQuery] = useState({
     filter: '',
-    language: 'English',
+    language: '',
     speaker: '',
     playlistName: '',
     ...overrideQuery
