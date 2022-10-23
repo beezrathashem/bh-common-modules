@@ -11,9 +11,9 @@ var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"))
 
 var _toConsumableArray2 = _interopRequireDefault(require("@babel/runtime/helpers/toConsumableArray"));
 
-var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
-
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
+
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
 
 var _slicedToArray2 = _interopRequireDefault(require("@babel/runtime/helpers/slicedToArray"));
 
@@ -24,17 +24,19 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2["default"])(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
 var useLectures = function useLectures(fb) {
+  var overrideQuery = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
   var _useState = (0, _react.useState)(null),
       _useState2 = (0, _slicedToArray2["default"])(_useState, 2),
       lastSnapshot = _useState2[0],
       setLastSnapshot = _useState2[1];
 
-  var _useState3 = (0, _react.useState)({
+  var _useState3 = (0, _react.useState)(_objectSpread({
     filter: '',
-    language: 'English',
+    language: '',
     speaker: '',
     playlistName: ''
-  }),
+  }, overrideQuery)),
       _useState4 = (0, _slicedToArray2["default"])(_useState3, 2),
       lectureQuery = _useState4[0],
       updateLectureQuery = _useState4[1];

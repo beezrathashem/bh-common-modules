@@ -14,6 +14,14 @@ export default (dp: any) => ({
     const db = questionQuery.isUnanswered ? dp.unansweredQuestionsDB : dp.questionsDB;
     return await procedures.fetch({ query: questionQuery, db, orderBy, filter });
   },
+  fetchUserQuestions: async (questionQuery) => {
+    const {lastKey} = questionQuery
+    const db = questionQuery.isUnanswered ? dp.unansweredQuestionsDB : dp.questionsDB;
+    const baseQuery = db.where('user_id', '==', questionQuery.user_id)
+    const query = lastKey ? baseQuery.startAfter(lastKey) : baseQuery
+    const doc = await query.limit(20).get();
+    return doc.data();
+  },
   paginate: async (questionQuery: IQuestionQuery) => {
     const db = questionQuery.isUnanswered ? dp.unansweredQuestionsDB : dp.questionsDB;
     return await procedures.paginate({ query: questionQuery, db, orderBy, filter });

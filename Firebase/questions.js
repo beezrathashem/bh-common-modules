@@ -57,15 +57,47 @@ var _default = function _default(dp) {
 
       return fetch;
     }(),
-    paginate: function () {
-      var _paginate = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(questionQuery) {
-        var db;
+    fetchUserQuestions: function () {
+      var _fetchUserQuestions = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(questionQuery) {
+        var lastKey, db, baseQuery, query, doc;
         return _regenerator["default"].wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
+                lastKey = questionQuery.lastKey;
                 db = questionQuery.isUnanswered ? dp.unansweredQuestionsDB : dp.questionsDB;
-                _context2.next = 3;
+                baseQuery = db.where('user_id', '==', questionQuery.user_id);
+                query = lastKey ? baseQuery.startAfter(lastKey) : baseQuery;
+                _context2.next = 6;
+                return query.limit(20).get();
+
+              case 6:
+                doc = _context2.sent;
+                return _context2.abrupt("return", doc.data());
+
+              case 8:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }));
+
+      function fetchUserQuestions(_x2) {
+        return _fetchUserQuestions.apply(this, arguments);
+      }
+
+      return fetchUserQuestions;
+    }(),
+    paginate: function () {
+      var _paginate = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(questionQuery) {
+        var db;
+        return _regenerator["default"].wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                db = questionQuery.isUnanswered ? dp.unansweredQuestionsDB : dp.questionsDB;
+                _context3.next = 3;
                 return _procedures["default"].paginate({
                   query: questionQuery,
                   db: db,
@@ -74,35 +106,9 @@ var _default = function _default(dp) {
                 });
 
               case 3:
-                return _context2.abrupt("return", _context2.sent);
-
-              case 4:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2);
-      }));
-
-      function paginate(_x2) {
-        return _paginate.apply(this, arguments);
-      }
-
-      return paginate;
-    }(),
-    deleteQ: function () {
-      var _deleteQ = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(question) {
-        return _regenerator["default"].wrap(function _callee3$(_context3) {
-          while (1) {
-            switch (_context3.prev = _context3.next) {
-              case 0:
-                _context3.next = 2;
-                return dp.unansweredQuestionsDB.doc(question.id)["delete"]();
-
-              case 2:
                 return _context3.abrupt("return", _context3.sent);
 
-              case 3:
+              case 4:
               case "end":
                 return _context3.stop();
             }
@@ -110,31 +116,25 @@ var _default = function _default(dp) {
         }, _callee3);
       }));
 
-      function deleteQ(_x3) {
-        return _deleteQ.apply(this, arguments);
+      function paginate(_x3) {
+        return _paginate.apply(this, arguments);
       }
 
-      return deleteQ;
+      return paginate;
     }(),
-    answerQ: function () {
-      var _answerQ = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee4(question) {
+    deleteQ: function () {
+      var _deleteQ = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee4(question) {
         return _regenerator["default"].wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
                 _context4.next = 2;
-                return dp.questionsDB.doc(question.id).set(_objectSpread(_objectSpread({}, question), {}, {
-                  timestamp: new Date().getTime()
-                }));
-
-              case 2:
-                _context4.next = 4;
                 return dp.unansweredQuestionsDB.doc(question.id)["delete"]();
 
-              case 4:
+              case 2:
                 return _context4.abrupt("return", _context4.sent);
 
-              case 5:
+              case 3:
               case "end":
                 return _context4.stop();
             }
@@ -142,27 +142,31 @@ var _default = function _default(dp) {
         }, _callee4);
       }));
 
-      function answerQ(_x4) {
-        return _answerQ.apply(this, arguments);
+      function deleteQ(_x4) {
+        return _deleteQ.apply(this, arguments);
       }
 
-      return answerQ;
+      return deleteQ;
     }(),
-    createQ: function () {
-      var _createQ = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee5(question) {
+    answerQ: function () {
+      var _answerQ = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee5(question) {
         return _regenerator["default"].wrap(function _callee5$(_context5) {
           while (1) {
             switch (_context5.prev = _context5.next) {
               case 0:
                 _context5.next = 2;
-                return dp.unansweredQuestionsDB.add(_objectSpread(_objectSpread({}, question), {}, {
+                return dp.questionsDB.doc(question.id).set(_objectSpread(_objectSpread({}, question), {}, {
                   timestamp: new Date().getTime()
                 }));
 
               case 2:
+                _context5.next = 4;
+                return dp.unansweredQuestionsDB.doc(question.id)["delete"]();
+
+              case 4:
                 return _context5.abrupt("return", _context5.sent);
 
-              case 3:
+              case 5:
               case "end":
                 return _context5.stop();
             }
@@ -170,27 +174,27 @@ var _default = function _default(dp) {
         }, _callee5);
       }));
 
-      function createQ(_x5) {
-        return _createQ.apply(this, arguments);
+      function answerQ(_x5) {
+        return _answerQ.apply(this, arguments);
       }
 
-      return createQ;
+      return answerQ;
     }(),
-    fetchById: function () {
-      var _fetchById = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee6(id) {
-        var doc;
+    createQ: function () {
+      var _createQ = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee6(question) {
         return _regenerator["default"].wrap(function _callee6$(_context6) {
           while (1) {
             switch (_context6.prev = _context6.next) {
               case 0:
                 _context6.next = 2;
-                return dp.questionsDB.doc(id).get();
+                return dp.unansweredQuestionsDB.add(_objectSpread(_objectSpread({}, question), {}, {
+                  timestamp: new Date().getTime()
+                }));
 
               case 2:
-                doc = _context6.sent;
-                return _context6.abrupt("return", doc.data());
+                return _context6.abrupt("return", _context6.sent);
 
-              case 4:
+              case 3:
               case "end":
                 return _context6.stop();
             }
@@ -198,7 +202,35 @@ var _default = function _default(dp) {
         }, _callee6);
       }));
 
-      function fetchById(_x6) {
+      function createQ(_x6) {
+        return _createQ.apply(this, arguments);
+      }
+
+      return createQ;
+    }(),
+    fetchById: function () {
+      var _fetchById = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee7(id) {
+        var doc;
+        return _regenerator["default"].wrap(function _callee7$(_context7) {
+          while (1) {
+            switch (_context7.prev = _context7.next) {
+              case 0:
+                _context7.next = 2;
+                return dp.questionsDB.doc(id).get();
+
+              case 2:
+                doc = _context7.sent;
+                return _context7.abrupt("return", doc.data());
+
+              case 4:
+              case "end":
+                return _context7.stop();
+            }
+          }
+        }, _callee7);
+      }));
+
+      function fetchById(_x7) {
         return _fetchById.apply(this, arguments);
       }
 

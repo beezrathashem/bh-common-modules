@@ -20,6 +20,7 @@ function initDB(firestore) {
     storeDB: firestore().collection('store'),
     topicsDB: firestore().collection('topics'),
     livestreamsDB: firestore().collection('livestreams'),
-    playlistsDB: firestore().collection('playlists')
+    playlistsDB: firestore().collection('playlists'),
+    usersDB: firestore().collection('users')
   };
 }
