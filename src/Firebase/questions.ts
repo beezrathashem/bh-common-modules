@@ -4,7 +4,7 @@
 type IQuestionQuery = any;
 type IQuestionItem = any;
 
-import procedures from './procedures';
+import procedures, { formatSnapshotData } from './procedures';
 
 const orderBy = 'timestamp';
 const filter = 'topic';
@@ -20,7 +20,7 @@ export default (dp: any) => ({
     const baseQuery = db.where('user_id', '==', questionQuery.user_id)
     const query = lastVisible ? baseQuery.startAfter(lastVisible) : baseQuery
     const doc = await query.limit(20).get();
-    return doc.map(d => d.data());
+    return formatSnapshotData(doc);
   },
   paginate: async (questionQuery: IQuestionQuery) => {
     const db = questionQuery.isUnanswered ? dp.unansweredQuestionsDB : dp.questionsDB;

@@ -113,9 +113,7 @@ const useQuestions = (fb: any, isUser = false) => {
   };
 
   useEffect(() => {
-    if (!skipFetch) {
       fetchData();
-    }
   }, [questionQuery.filter, questionQuery.isUnanswered]);
 
   return {

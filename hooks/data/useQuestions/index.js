@@ -24,7 +24,7 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2["default"])(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
 var useQuestions = function useQuestions(fb) {
-  var skipFetch = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+  var isUser = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
   var _useState = (0, _react.useState)([]),
       _useState2 = (0, _slicedToArray2["default"])(_useState, 2),
@@ -68,34 +68,35 @@ var useQuestions = function useQuestions(fb) {
 
   var fetchData = /*#__PURE__*/function () {
     var _ref = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee() {
-      var res;
+      var query, res;
       return _regenerator["default"].wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
               setLoading(true);
               _context.prev = 1;
-              _context.next = 4;
-              return fb.questions.fetch(_objectSpread(_objectSpread({}, questionQuery), {}, {
+              query = isUser ? fb.questions.fetchUser : fb.questions.fetch;
+              _context.next = 5;
+              return query(_objectSpread(_objectSpread({}, questionQuery), {}, {
                 lastVisible: null
               }));
 
-            case 4:
+            case 5:
               res = _context.sent;
               setData(res.payload);
               setLastSnapshot(res.updatedLastVisible);
 
-            case 7:
-              _context.prev = 7;
+            case 8:
+              _context.prev = 8;
               setLoading(false);
-              return _context.finish(7);
+              return _context.finish(8);
 
-            case 10:
+            case 11:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[1,, 7, 10]]);
+      }, _callee, null, [[1,, 8, 11]]);
     }));
 
     return function fetchData() {
@@ -105,34 +106,35 @@ var useQuestions = function useQuestions(fb) {
 
   var refresh = /*#__PURE__*/function () {
     var _ref2 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2() {
-      var res;
+      var query, res;
       return _regenerator["default"].wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
               setRefreshing(true);
               _context2.prev = 1;
-              _context2.next = 4;
-              return fb.questions.fetch(_objectSpread(_objectSpread({}, questionQuery), {}, {
+              query = isUser ? fb.questions.fetchUser : fb.questions.fetch;
+              _context2.next = 5;
+              return query(_objectSpread(_objectSpread({}, questionQuery), {}, {
                 lastVisible: null
               }));
 
-            case 4:
+            case 5:
               res = _context2.sent;
               setData(res.payload);
               setLastSnapshot(res.updatedLastVisible);
 
-            case 7:
-              _context2.prev = 7;
+            case 8:
+              _context2.prev = 8;
               setRefreshing(false);
-              return _context2.finish(7);
+              return _context2.finish(8);
 
-            case 10:
+            case 11:
             case "end":
               return _context2.stop();
           }
         }
-      }, _callee2, null, [[1,, 7, 10]]);
+      }, _callee2, null, [[1,, 8, 11]]);
     }));
 
     return function refresh() {
@@ -142,7 +144,7 @@ var useQuestions = function useQuestions(fb) {
 
   var fetchMore = /*#__PURE__*/function () {
     var _ref3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3() {
-      var res;
+      var query, res;
       return _regenerator["default"].wrap(function _callee3$(_context3) {
         while (1) {
           switch (_context3.prev = _context3.next) {
@@ -165,12 +167,13 @@ var useQuestions = function useQuestions(fb) {
             case 4:
               setPaginating(true);
               _context3.prev = 5;
-              _context3.next = 8;
-              return fb.questions.paginate(_objectSpread(_objectSpread({}, questionQuery), {}, {
+              query = isUser ? fb.questions.fetchUser : fb.questions.paginate;
+              _context3.next = 9;
+              return query(_objectSpread(_objectSpread({}, questionQuery), {}, {
                 lastVisible: lastSnapshot
               }));
 
-            case 8:
+            case 9:
               res = _context3.sent;
 
               if (res.updatedLastVisible) {
@@ -181,25 +184,25 @@ var useQuestions = function useQuestions(fb) {
                 });
               }
 
-              _context3.next = 15;
+              _context3.next = 16;
               break;
 
-            case 12:
-              _context3.prev = 12;
+            case 13:
+              _context3.prev = 13;
               _context3.t0 = _context3["catch"](5);
               console.log('wooops', _context3.t0);
 
-            case 15:
-              _context3.prev = 15;
+            case 16:
+              _context3.prev = 16;
               setPaginating(false);
-              return _context3.finish(15);
+              return _context3.finish(16);
 
-            case 18:
+            case 19:
             case "end":
               return _context3.stop();
           }
         }
-      }, _callee3, null, [[5, 12, 15, 18]]);
+      }, _callee3, null, [[5, 13, 16, 19]]);
     }));
 
     return function fetchMore() {
@@ -355,9 +358,7 @@ var useQuestions = function useQuestions(fb) {
   }();
 
   (0, _react.useEffect)(function () {
-    if (!skipFetch) {
-      fetchData();
-    }
+    fetchData();
   }, [questionQuery.filter, questionQuery.isUnanswered]);
   return {
     data: data,

@@ -2,6 +2,8 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
+var _typeof = require("@babel/runtime/helpers/typeof");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -13,7 +15,11 @@ var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/de
 
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 
-var _procedures = _interopRequireDefault(require("./procedures"));
+var _procedures = _interopRequireWildcard(require("./procedures"));
+
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
@@ -57,25 +63,23 @@ var _default = function _default(dp) {
 
       return fetch;
     }(),
-    fetchUserQuestions: function () {
-      var _fetchUserQuestions = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(questionQuery) {
-        var lastKey, db, baseQuery, query, doc;
+    fetchUser: function () {
+      var _fetchUser = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(questionQuery) {
+        var lastVisible, db, baseQuery, query, doc;
         return _regenerator["default"].wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                lastKey = questionQuery.lastKey;
+                lastVisible = questionQuery.lastVisible;
                 db = questionQuery.isUnanswered ? dp.unansweredQuestionsDB : dp.questionsDB;
                 baseQuery = db.where('user_id', '==', questionQuery.user_id);
-                query = lastKey ? baseQuery.startAfter(lastKey) : baseQuery;
+                query = lastVisible ? baseQuery.startAfter(lastVisible) : baseQuery;
                 _context2.next = 6;
                 return query.limit(20).get();
 
               case 6:
                 doc = _context2.sent;
-                return _context2.abrupt("return", doc.map(function (d) {
-                  return d.data();
-                }));
+                return _context2.abrupt("return", (0, _procedures.formatSnapshotData)(doc));
 
               case 8:
               case "end":
@@ -85,11 +89,11 @@ var _default = function _default(dp) {
         }, _callee2);
       }));
 
-      function fetchUserQuestions(_x2) {
-        return _fetchUserQuestions.apply(this, arguments);
+      function fetchUser(_x2) {
+        return _fetchUser.apply(this, arguments);
       }
 
-      return fetchUserQuestions;
+      return fetchUser;
     }(),
     paginate: function () {
       var _paginate = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(questionQuery) {
