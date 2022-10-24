@@ -73,7 +73,9 @@ var _default = function _default(dp) {
 
               case 6:
                 doc = _context2.sent;
-                return _context2.abrupt("return", doc.data());
+                return _context2.abrupt("return", doc.map(function (d) {
+                  return d.data();
+                }));
 
               case 8:
               case "end":

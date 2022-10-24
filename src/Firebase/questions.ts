@@ -20,7 +20,7 @@ export default (dp: any) => ({
     const baseQuery = db.where('user_id', '==', questionQuery.user_id)
     const query = lastKey ? baseQuery.startAfter(lastKey) : baseQuery
     const doc = await query.limit(20).get();
-    return doc.data();
+    return doc.map(d => d.data());
   },
   paginate: async (questionQuery: IQuestionQuery) => {
     const db = questionQuery.isUnanswered ? dp.unansweredQuestionsDB : dp.questionsDB;
