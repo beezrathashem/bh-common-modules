@@ -24,7 +24,7 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2["default"])(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
 var useQuestions = function useQuestions(fb) {
-  var userId = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+  var user_id = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 
   var _useState = (0, _react.useState)([]),
       _useState2 = (0, _slicedToArray2["default"])(_useState, 2),
@@ -61,7 +61,7 @@ var useQuestions = function useQuestions(fb) {
     filter: '',
     speaker: '',
     isUnanswered: false,
-    userId: userId
+    user_id: user_id
   }),
       _useState14 = (0, _slicedToArray2["default"])(_useState13, 2),
       questionQuery = _useState14[0],
@@ -76,7 +76,7 @@ var useQuestions = function useQuestions(fb) {
             case 0:
               setLoading(true);
               _context.prev = 1;
-              query = userId ? fb.questions.fetchUser : fb.questions.fetch;
+              query = user_id ? fb.questions.fetchUser : fb.questions.fetch;
               _context.next = 5;
               return query(_objectSpread(_objectSpread({}, questionQuery), {}, {
                 lastVisible: null
@@ -117,7 +117,7 @@ var useQuestions = function useQuestions(fb) {
             case 0:
               setRefreshing(true);
               _context2.prev = 1;
-              query = isUser ? fb.questions.fetchUser : fb.questions.fetch;
+              query = user_id ? fb.questions.fetchUser : fb.questions.fetch;
               _context2.next = 5;
               return query(_objectSpread(_objectSpread({}, questionQuery), {}, {
                 lastVisible: null
@@ -171,7 +171,7 @@ var useQuestions = function useQuestions(fb) {
             case 4:
               setPaginating(true);
               _context3.prev = 5;
-              query = isUser ? fb.questions.fetchUser : fb.questions.paginate;
+              query = user_id ? fb.questions.fetchUser : fb.questions.paginate;
               _context3.next = 9;
               return query(_objectSpread(_objectSpread({}, questionQuery), {}, {
                 lastVisible: lastSnapshot
