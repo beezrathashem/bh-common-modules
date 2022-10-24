@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-const useQuestions = (fb: any, isUser = false) => {
+const useQuestions = (fb: any, userId = null) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [paginating, setPaginating] = useState(false);
@@ -12,16 +12,20 @@ const useQuestions = (fb: any, isUser = false) => {
     filter: '',
     speaker: '',
     isUnanswered: false,
+    userId
   });
 
   const fetchData = async () => {
     setLoading(true);
     try {
-      const query = isUser ? fb.questions.fetchUser : fb.questions.fetch
+      const query = userId ? fb.questions.fetchUser : fb.questions.fetch
       const res = await  query({
         ...questionQuery,
         lastVisible: null,
       });
+      console.log({
+        res
+      })
       setData(res.payload);
       setLastSnapshot(res.updatedLastVisible);
     } finally {
