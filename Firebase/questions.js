@@ -71,8 +71,8 @@ var _default = function _default(dp) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 lastVisible = questionQuery.lastVisible;
-                db = questionQuery.isUnanswered ? dp.unansweredQuestionsDB : dp.questionsDB;
-                baseQuery = db.where('user_id', '==', questionQuery.user_id);
+                db = questionQuery !== null && questionQuery !== void 0 && questionQuery.isUnanswered ? dp.unansweredQuestionsDB : dp.questionsDB;
+                baseQuery = db.where('user_id', '==', questionQuery.userId);
                 query = lastVisible ? baseQuery.startAfter(lastVisible) : baseQuery;
                 _context2.next = 6;
                 return query.limit(20).get();

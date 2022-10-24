@@ -24,7 +24,7 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2["default"])(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
 var useQuestions = function useQuestions(fb) {
-  var isUser = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+  var userId = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 
   var _useState = (0, _react.useState)([]),
       _useState2 = (0, _slicedToArray2["default"])(_useState, 2),
@@ -60,7 +60,8 @@ var useQuestions = function useQuestions(fb) {
     language: '',
     filter: '',
     speaker: '',
-    isUnanswered: false
+    isUnanswered: false,
+    userId: userId
   }),
       _useState14 = (0, _slicedToArray2["default"])(_useState13, 2),
       questionQuery = _useState14[0],
@@ -75,7 +76,7 @@ var useQuestions = function useQuestions(fb) {
             case 0:
               setLoading(true);
               _context.prev = 1;
-              query = isUser ? fb.questions.fetchUser : fb.questions.fetch;
+              query = userId ? fb.questions.fetchUser : fb.questions.fetch;
               _context.next = 5;
               return query(_objectSpread(_objectSpread({}, questionQuery), {}, {
                 lastVisible: null
@@ -83,20 +84,23 @@ var useQuestions = function useQuestions(fb) {
 
             case 5:
               res = _context.sent;
+              console.log({
+                res: res
+              });
               setData(res.payload);
               setLastSnapshot(res.updatedLastVisible);
 
-            case 8:
-              _context.prev = 8;
+            case 9:
+              _context.prev = 9;
               setLoading(false);
-              return _context.finish(8);
+              return _context.finish(9);
 
-            case 11:
+            case 12:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[1,, 8, 11]]);
+      }, _callee, null, [[1,, 9, 12]]);
     }));
 
     return function fetchData() {
