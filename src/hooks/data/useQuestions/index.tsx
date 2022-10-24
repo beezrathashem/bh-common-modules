@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-const useQuestions = (fb: any, skipFetch = false) => {
+const useQuestions = (fb: any, isUser = false) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [paginating, setPaginating] = useState(false);
@@ -17,7 +17,8 @@ const useQuestions = (fb: any, skipFetch = false) => {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const res = await fb.questions.fetch({
+      const query = isUser ? fb.questions.fetchUser : fb.questions.fetch
+      const res = await  query({
         ...questionQuery,
         lastVisible: null,
       });
@@ -31,7 +32,8 @@ const useQuestions = (fb: any, skipFetch = false) => {
   const refresh = async () => {
     setRefreshing(true);
     try {
-      const res = await fb.questions.fetch({
+      const query = isUser ? fb.questions.fetchUser : fb.questions.fetch
+      const res = await query({
         ...questionQuery,
         lastVisible: null,
       });
@@ -47,7 +49,8 @@ const useQuestions = (fb: any, skipFetch = false) => {
     if (paginating) return;
     setPaginating(true);
     try {
-      const res = await fb.questions.paginate({
+      const query = isUser ? fb.questions.fetchUser : fb.questions.paginate
+      const res = await query({
         ...questionQuery,
         lastVisible: lastSnapshot,
       });

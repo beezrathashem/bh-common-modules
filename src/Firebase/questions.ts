@@ -14,11 +14,11 @@ export default (dp: any) => ({
     const db = questionQuery.isUnanswered ? dp.unansweredQuestionsDB : dp.questionsDB;
     return await procedures.fetch({ query: questionQuery, db, orderBy, filter });
   },
-  fetchUserQuestions: async (questionQuery) => {
-    const {lastKey} = questionQuery
+  fetchUser: async (questionQuery) => {
+    const {lastVisible} = questionQuery
     const db = questionQuery.isUnanswered ? dp.unansweredQuestionsDB : dp.questionsDB;
     const baseQuery = db.where('user_id', '==', questionQuery.user_id)
-    const query = lastKey ? baseQuery.startAfter(lastKey) : baseQuery
+    const query = lastVisible ? baseQuery.startAfter(lastVisible) : baseQuery
     const doc = await query.limit(20).get();
     return doc.map(d => d.data());
   },
