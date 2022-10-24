@@ -17,7 +17,7 @@ export default (dp: any) => ({
   fetchUser: async (questionQuery) => {
     const {lastVisible} = questionQuery
     const db = questionQuery?.isUnanswered ? dp.unansweredQuestionsDB : dp.questionsDB;
-    const baseQuery = db.where('user_id', '==', questionQuery.user_id)
+    const baseQuery = db.where('user_id', '==', questionQuery.userId)
     const query = lastVisible ? baseQuery.startAfter(lastVisible) : baseQuery
     const doc = await query.limit(20).get();
     return formatSnapshotData(doc);
