@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-const useQuestions = (fb: any, userId = null) => {
+const useQuestions = (fb: any, user_id = null) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [paginating, setPaginating] = useState(false);
@@ -12,13 +12,13 @@ const useQuestions = (fb: any, userId = null) => {
     filter: '',
     speaker: '',
     isUnanswered: false,
-    userId
+    user_id
   });
 
   const fetchData = async () => {
     setLoading(true);
     try {
-      const query = userId ? fb.questions.fetchUser : fb.questions.fetch
+      const query = user_id ? fb.questions.fetchUser : fb.questions.fetch
       const res = await  query({
         ...questionQuery,
         lastVisible: null,
@@ -36,7 +36,7 @@ const useQuestions = (fb: any, userId = null) => {
   const refresh = async () => {
     setRefreshing(true);
     try {
-      const query = isUser ? fb.questions.fetchUser : fb.questions.fetch
+      const query = user_id ? fb.questions.fetchUser : fb.questions.fetch
       const res = await query({
         ...questionQuery,
         lastVisible: null,
@@ -53,7 +53,7 @@ const useQuestions = (fb: any, userId = null) => {
     if (paginating) return;
     setPaginating(true);
     try {
-      const query = isUser ? fb.questions.fetchUser : fb.questions.paginate
+      const query = user_id ? fb.questions.fetchUser : fb.questions.paginate
       const res = await query({
         ...questionQuery,
         lastVisible: lastSnapshot,
