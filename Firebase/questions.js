@@ -1,33 +1,21 @@
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 var _typeof = require("@babel/runtime/helpers/typeof");
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = void 0;
-
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
-
 var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
-
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
-
 var _procedures = _interopRequireWildcard(require("./procedures"));
-
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2["default"])(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-
 var orderBy = 'timestamp';
 var filter = 'topic';
-
 var _default = function _default(dp) {
   return {
     fetch: function () {
@@ -45,10 +33,8 @@ var _default = function _default(dp) {
                   orderBy: orderBy,
                   filter: filter
                 });
-
               case 3:
                 return _context.abrupt("return", _context.sent);
-
               case 4:
               case "end":
                 return _context.stop();
@@ -56,11 +42,9 @@ var _default = function _default(dp) {
           }
         }, _callee);
       }));
-
       function fetch(_x) {
         return _fetch.apply(this, arguments);
       }
-
       return fetch;
     }(),
     fetchUser: function () {
@@ -76,11 +60,9 @@ var _default = function _default(dp) {
                 query = lastVisible ? baseQuery.startAfter(lastVisible) : baseQuery;
                 _context2.next = 6;
                 return query.limit(20).get();
-
               case 6:
                 doc = _context2.sent;
                 return _context2.abrupt("return", (0, _procedures.formatSnapshotData)(doc));
-
               case 8:
               case "end":
                 return _context2.stop();
@@ -88,11 +70,9 @@ var _default = function _default(dp) {
           }
         }, _callee2);
       }));
-
       function fetchUser(_x2) {
         return _fetchUser.apply(this, arguments);
       }
-
       return fetchUser;
     }(),
     paginate: function () {
@@ -110,10 +90,8 @@ var _default = function _default(dp) {
                   orderBy: orderBy,
                   filter: filter
                 });
-
               case 3:
                 return _context3.abrupt("return", _context3.sent);
-
               case 4:
               case "end":
                 return _context3.stop();
@@ -121,11 +99,9 @@ var _default = function _default(dp) {
           }
         }, _callee3);
       }));
-
       function paginate(_x3) {
         return _paginate.apply(this, arguments);
       }
-
       return paginate;
     }(),
     deleteQ: function () {
@@ -136,10 +112,8 @@ var _default = function _default(dp) {
               case 0:
                 _context4.next = 2;
                 return dp.unansweredQuestionsDB.doc(question.id)["delete"]();
-
               case 2:
                 return _context4.abrupt("return", _context4.sent);
-
               case 3:
               case "end":
                 return _context4.stop();
@@ -147,11 +121,9 @@ var _default = function _default(dp) {
           }
         }, _callee4);
       }));
-
       function deleteQ(_x4) {
         return _deleteQ.apply(this, arguments);
       }
-
       return deleteQ;
     }(),
     answerQ: function () {
@@ -164,14 +136,11 @@ var _default = function _default(dp) {
                 return dp.questionsDB.doc(question.id).set(_objectSpread(_objectSpread({}, question), {}, {
                   timestamp: new Date().getTime()
                 }));
-
               case 2:
                 _context5.next = 4;
                 return dp.unansweredQuestionsDB.doc(question.id)["delete"]();
-
               case 4:
                 return _context5.abrupt("return", _context5.sent);
-
               case 5:
               case "end":
                 return _context5.stop();
@@ -179,11 +148,9 @@ var _default = function _default(dp) {
           }
         }, _callee5);
       }));
-
       function answerQ(_x5) {
         return _answerQ.apply(this, arguments);
       }
-
       return answerQ;
     }(),
     createQ: function () {
@@ -196,10 +163,8 @@ var _default = function _default(dp) {
                 return dp.unansweredQuestionsDB.add(_objectSpread(_objectSpread({}, question), {}, {
                   timestamp: new Date().getTime()
                 }));
-
               case 2:
                 return _context6.abrupt("return", _context6.sent);
-
               case 3:
               case "end":
                 return _context6.stop();
@@ -207,11 +172,9 @@ var _default = function _default(dp) {
           }
         }, _callee6);
       }));
-
       function createQ(_x6) {
         return _createQ.apply(this, arguments);
       }
-
       return createQ;
     }(),
     fetchById: function () {
@@ -223,11 +186,9 @@ var _default = function _default(dp) {
               case 0:
                 _context7.next = 2;
                 return dp.questionsDB.doc(id).get();
-
               case 2:
                 doc = _context7.sent;
                 return _context7.abrupt("return", doc.data());
-
               case 4:
               case "end":
                 return _context7.stop();
@@ -235,14 +196,11 @@ var _default = function _default(dp) {
           }
         }, _callee7);
       }));
-
       function fetchById(_x7) {
         return _fetchById.apply(this, arguments);
       }
-
       return fetchById;
     }()
   };
 };
-
 exports["default"] = _default;

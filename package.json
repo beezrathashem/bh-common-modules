@@ -36,8 +36,8 @@
     "mocha": "^10.1.0",
     "pre-commit": "latest",
     "prettier": "latest",
-    "react": "latest",
-    "react-native": "latest",
+    "react": "18.1.0",
+    "react-native": "0.70.5",
     "scripts": "*"
   }
 }

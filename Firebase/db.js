@@ -4,7 +4,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.initDB = initDB;
-
 function initDB(firestore) {
   return {
     articlesDB: firestore().collection('articles'),
