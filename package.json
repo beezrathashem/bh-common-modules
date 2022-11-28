@@ -14,6 +14,10 @@
     "test": "echo 'no need to test bh-common-modules'",
     "dep-test": "npm run lint && npm run lint"
   },
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*"
+  },
   "dependencies": {
     "algoliasearch": "latest",
     "axios": "^1.2.0",
@@ -36,8 +40,6 @@
     "mocha": "^10.1.0",
     "pre-commit": "latest",
     "prettier": "latest",
-    "react": "18.1.0",
-    "react-native": "0.70.5",
     "scripts": "*"
   }
 }
