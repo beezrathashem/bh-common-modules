@@ -7,7 +7,7 @@ export const useLectures = (fb: any, overrideQuery = {}) => {
     language: '',
     speaker: '',
     playlistName: '',
-    ...overrideQuery
+    ...overrideQuery,
   });
   const [paginating, setPaginating] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
@@ -15,6 +15,7 @@ export const useLectures = (fb: any, overrideQuery = {}) => {
   const [data, setData] = useState([]);
 
   const fetchData = async () => {
+    console.log({ lectureQuery });
     const { payload, updatedLastVisible } = await fb.lectures.fetch({
       ...lectureQuery,
       lastVisible: null,
@@ -47,9 +48,16 @@ export const useLectures = (fb: any, overrideQuery = {}) => {
     }
   };
 
+  console.log('LEC', lectureQuery?.filter);
   useEffect(() => {
     onFetch();
-  }, [lectureQuery.language, lectureQuery.speaker, lectureQuery.filter, lectureQuery.playlistName]);
+  }, [
+    lectureQuery.language,
+    lectureQuery.speaker,
+    overrideQuery?.filter,
+    lectureQuery.filter,
+    lectureQuery.playlistName,
+  ]);
 
   const onPaginateLectures = async () => {
     setPaginating(true);
