@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import algoliasearch from 'algoliasearch';
+import { MeiliSearch } from 'meilisearch';
 // import { ISearchQuery } from 'bh-common-types/src/Interfaces/Lectures';
 import { handleError } from 'bh-common-modules/Errors';
 
@@ -8,11 +8,19 @@ const saveSyncItems = async (storage, searchQuery, data) => {
   await storage.set(`${searchQuery.id}-updated-at`, JSON.stringify(searchQuery.updated_at));
 };
 
-const useSearchQuery = ({ Firebase, searchQuery, algolia_app_id, algolia_search_key, storage }: any) => {
+const useSearchQuery = ({ Firebase, searchQuery, host, apiKey, storage }: any) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
-  const client = useMemo(() => algoliasearch(algolia_app_id, algolia_search_key), []);
-  const get_lectures = useMemo(() => client.initIndex('get_lectures'), []);
+  const client = useMemo(
+    () =>
+      new MeiliSearch({
+        host,
+        apiKey,
+      }),
+    [],
+  );
+
+  const get_lectures = useMemo(() => client.index('get_lectures'), []);
 
   const determineDataSet = async (searchQuery: any) => {
     const lastUpdatedAt = JSON.parse(await storage.get(`${searchQuery.id}-updated-at`));
